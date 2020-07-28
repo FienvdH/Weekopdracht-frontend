@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <script>function opnaardebackend() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                hetObject = JSON.parse(this.responseText);
+                document.getElementById("uitkomst").innerHTML = hetObject.name;
+            }
+            xhr.open("GET", "http://localhost:8082/nieuwobject", true); //asynchroon
+            xhr.send();
+
+        }
+        function posten() {
+            alert("doet hij het ?")
+            var obj = {};
+            obj.name = document.getElementById("denaam").value;
+            objJSON = JSON.stringify(obj);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                console.log("antwoord in de post");
+            }
+            xhr.open("POST", "http://localhost:8082/new", true); //asynchroon
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(objJSON);
+        }</script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type=text id=denaam><input type=button onclick=posten() value=versturen>
+    <input type="button" onclick="opnaardebackend()" value="Op naar de backend">
+    <div id=uitkomst>hij doet het</div>
+</body>
+
+</html>
